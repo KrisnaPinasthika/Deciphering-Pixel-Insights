@@ -6,9 +6,9 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from diodetools.DiodeLoader import DiodeDataLoader
 from diodetools.TrainTest import train, load_state 
-from Model.MonoAGIResNet import MonoAGIResNet
-from Model.MonoAGIDenseNet import MonoAGIDenseNet
-from Model.MonoAGIEfficientV2 import MonoAGIEfficientV2
+from Model.UNetAttentionResNet import UNetAttentionResNet
+from Model.UNetAttentionDenseNet import UNetAttentionDenseNet
+from Model.UNetAttentionEfficientV2 import UNetAttentionEfficientV2
 
 torch.random.manual_seed(1)
 np.random.seed(1)
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     device = torch.device("cuda")
     backbone = 'efficient_v2_s'
     model_name = f'{backbone}'
-    model = MonoAGIEfficientV2(device=device, backbone_name=backbone, freeze=True)
+    model = UNetAttentionEfficientV2(device=device, backbone_name=backbone, freeze=True)
     
     optimizer = optim.Adam(model.parameters(), lr=1e-4)
     l1_weight = .1

@@ -133,11 +133,11 @@ class AdditiveAttentionGate(nn.Module):
 
         return psi * x
 
-class MonoAGIResNet(nn.Module):
+class UNetAttentionResNet(nn.Module):
     """Some Information about UNetResNet"""
 
     def __init__(self, device, backbone, freeze=False):
-        super(MonoAGIResNet, self).__init__()
+        super(UNetAttentionResNet, self).__init__()
         self.encoder = RenseNetEncoderBlock(backbone, freeze).to(device)
         self.backbone = backbone
         # features = size of last channel
@@ -225,7 +225,7 @@ class MonoAGIResNet(nn.Module):
 
 if __name__ == '__main__': 
     from prettytable import PrettyTable
-    model = MonoAGIResNet(device='cuda', backbone='resnet18')
+    model = UNetAttentionResNet(device='cuda', backbone='resnet18')
     img = torch.randn(size=(5, 3, 256, 256)).to('cuda')
     print(model(img).shape)
     # print('--'*20)
