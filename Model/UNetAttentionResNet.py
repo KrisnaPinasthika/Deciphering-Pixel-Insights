@@ -156,22 +156,10 @@ class UNetAttentionResNet(nn.Module):
             return None
         
         self.decoder = nn.ModuleList([
-            DecoderBLock(input_channel= features[-1],
-                            concatenated_channel=features[-1] + features[-2], 
-                            output_channel=features[-2], 
-                            kernel_size=3),
-            DecoderBLock(input_channel= features[-2],
-                            concatenated_channel=features[-2] + features[-3], 
-                            output_channel=features[-3], 
-                            kernel_size=3),
-            DecoderBLock(input_channel= features[-3],
-                            concatenated_channel=features[-3] + features[-4],  
-                            output_channel=features[-4], 
-                            kernel_size=3),
-            DecoderBLock(input_channel= features[-4],
-                            concatenated_channel=features[-4] + features[-5],  
-                            output_channel=features[-5], 
-                            kernel_size=3),
+            DecoderBLock(input_channel= features[-1], concatenated_channel=features[-1] + features[-2], output_channel=features[-2], kernel_size=3),
+            DecoderBLock(input_channel= features[-2], concatenated_channel=features[-2] + features[-3], output_channel=features[-3], kernel_size=3),
+            DecoderBLock(input_channel= features[-3], concatenated_channel=features[-3] + features[-4], output_channel=features[-4], kernel_size=3),
+            DecoderBLock(input_channel= features[-4], concatenated_channel=features[-4] + features[-5], output_channel=features[-5], kernel_size=3),
         ]).to(device)
         
         self.attention = nn.ModuleList([
@@ -182,11 +170,7 @@ class UNetAttentionResNet(nn.Module):
         ]).to(device)
 
         self.head = nn.Sequential(
-            nn.Conv2d(in_channels=features[-5], 
-                        out_channels=features[-5]//2, 
-                        kernel_size=3, 
-                        stride=1, 
-                        padding="same"),
+            nn.Conv2d(in_channels=features[-5], out_channels=features[-5]//2, kernel_size=3, stride=1, padding="same"),
             nn.ConvTranspose2d(
                         in_channels=features[-5]//2,
                         out_channels=features[-5]//2,
@@ -195,11 +179,7 @@ class UNetAttentionResNet(nn.Module):
                         padding=0,
                         dilation=1,
                         bias=True,),
-            nn.Conv2d(in_channels=features[-5]//2, 
-                        out_channels=1, 
-                        kernel_size=1, 
-                        stride=1, 
-                        padding="same"),
+            nn.Conv2d(in_channels=features[-5]//2, out_channels=1, kernel_size=1, stride=1, padding="same"),
             nn.Sigmoid()
         ).to(device)
 
