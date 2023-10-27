@@ -1,4 +1,5 @@
-SavedModel/
-old/mde.ipynb
 architectures_output_per_block.ipynb
 encoder_params.ipynb
+
+SavedModel/
+old/mde.ipynb
