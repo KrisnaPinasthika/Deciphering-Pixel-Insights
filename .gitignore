@@ -1,6 +1,4 @@
 architectures_output_per_block.ipynb
 encoder_params.ipynbZ
-SavedModel/
-old/mde.ipynb
-encoder_params.ipynb
-evaluation_metrics_checker.ipynb
+SavedModel/*
+Ablations/*
